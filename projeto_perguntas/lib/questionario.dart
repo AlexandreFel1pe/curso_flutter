@@ -27,16 +27,16 @@ class Questionario extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-          Questao('${perguntas[perguntaSelecionada]['texto']}'),
-          ...respostas
-            .map((resp) {
-              return Resposta(
-                resp['texto'] as String, 
-                () => responder(resp['pontuacao'] as int)
-              );
-            }
-          )
-        ],
-      );
+        Questao('${perguntas[perguntaSelecionada]['texto']}'),
+        ...respostas
+          .map((resp) {
+            return Resposta(
+              resp['texto'] as String, 
+              () => responder(resp['pontuacao'] as int)
+            );
+          }
+        )
+      ],
+    );
   }
 }
