@@ -31,27 +31,36 @@ class _PerguntaAppState extends State<PerguntaApp> {
     ];
 
   void _responder() {
-    setState(() {
-      _perguntaSelecionada++;
-    });
-    print(_perguntaSelecionada);
+    if (temPerguntaSelecionada) {
+      setState(() {
+        _perguntaSelecionada++;
+      });
+    }
+  }
+
+  bool get temPerguntaSelecionada {
+    return _perguntaSelecionada < _perguntas.length;
   }
 
   @override
   Widget build(BuildContext context) {
-    List<String> respostas = _perguntas[_perguntaSelecionada]['respostas'] as List<String>;
+    List<String> respostas = temPerguntaSelecionada
+    ? _perguntas[_perguntaSelecionada]['respostas'] as List<String>
+    : List.empty();
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('Perguntas'),
         ),
-        body: Column(
+        body: temPerguntaSelecionada 
+        ? Column(
           children: [
-            Questao('${_perguntas[_perguntaSelecionada]['texto']}'),
-            ...respostas.map((t) => Resposta(t, _responder)),
-          ],
-        ),
+              Questao('${_perguntas[_perguntaSelecionada]['texto']}'),
+              ...respostas.map((t) => Resposta(t, _responder)),
+            ],
+          ) 
+        : Text('Você concluiu o quiz!'),
       ),
     );
   }
