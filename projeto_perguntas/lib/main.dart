@@ -16,19 +16,34 @@ class PerguntaApp extends StatefulWidget {
 class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
   final _perguntas = const [
-      {
-        'texto': 'Qual é a sua cor favorita?',
-        'respostas': ['Preto', 'Vemelho', 'Branco', 'Verde'],
-      },
-      {
-        'texto': 'Qual é o seu animal favorito?',
-        'respostas': ['Coelho', 'Cobra', 'Elefante', 'Leão'],
-      },
-      {
-        'texto': 'Qual é o seu instrutor favorito?',
-        'respostas': ['Maria', 'João', 'Leo', 'Pedro'],
-      },
-    ];
+    {
+      'texto': 'Qual é a sua cor favorita?',
+      'respostas': [
+        {'texto': 'Preto', 'nota': 10},
+        {'texto': 'Vemelho', 'nota': 10},
+        {'texto': 'Branco', 'nota': 10},
+        {'texto': 'Verde', 'nota': 10},
+      ],
+    },
+    {
+      'texto': 'Qual é o seu animal favorito??',
+      'respostas': [
+        {'texto': 'Coelho', 'nota': 10},
+        {'texto': 'Cobra', 'nota': 5},
+        {'texto': 'Elefante', 'nota': 3},
+        {'texto': 'Leão', 'nota': 1},
+      ]
+    },
+    {
+      'texto': 'Qual é o seu instrutor favorito?',
+      'respostas': [
+        {'texto': 'Maria', 'nota': 10},
+        {'texto': 'João', 'nota': 5},
+        {'texto': 'Leo', 'nota': 3},
+        {'texto': 'Pedro', 'nota': 1},
+      ]
+    },
+  ];
 
   void _responder() {
     if (temPerguntaSelecionada) {
@@ -46,16 +61,14 @@ class _PerguntaAppState extends State<PerguntaApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Perguntas'),
-        ),
+        appBar: AppBar(title: Text('Perguntas')),
         body: temPerguntaSelecionada
-        ? Questionario(
-          perguntas: _perguntas, 
-          perguntaSelecionada: _perguntaSelecionada, 
-          responder: _responder
-          )
-        : Resultado(),
+            ? Questionario(
+                perguntas: _perguntas,
+                perguntaSelecionada: _perguntaSelecionada,
+                responder: _responder,
+              )
+            : Resultado(),
       ),
     );
   }
