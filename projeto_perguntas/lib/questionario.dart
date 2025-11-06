@@ -25,6 +25,7 @@ class Questionario extends StatelessWidget {
     : List.empty();
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
           Questao('${perguntas[perguntaSelecionada]['texto']}'),
           ...respostas
