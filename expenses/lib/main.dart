@@ -27,24 +27,26 @@ class MyHomePage extends StatelessWidget {
         ),
         backgroundColor: Colors.blue,
       ),
-      body: Center(
-        child: SizedBox(
-          width: max(0, 500),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(
-                width: double.infinity,
-                child: Card(
-                  color: Colors.blue,
-                  elevation: 5,
-                  child: Text(
-                    'Grafico',
+      body: SingleChildScrollView(
+        child: Center(
+          child: SizedBox(
+            width: max(0, 500),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: Card(
+                    color: Colors.blue,
+                    elevation: 5,
+                    child: Text(
+                      'Grafico',
+                    ),
                   ),
                 ),
-              ),
-              TransactionUser(),
-            ],
+                TransactionUser(),
+              ],
+            ),
           ),
         ),
       ),
