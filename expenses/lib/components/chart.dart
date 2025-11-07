@@ -1,3 +1,4 @@
+import 'package:expenses/components/chart_bar.dart';
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -24,13 +25,16 @@ class Chart extends StatelessWidget {
           totalSum += recentTransaction[i].value;
         }
       }
-
-      print(DateFormat.E().format(weekDay)[0]);
-      print(totalSum);
-
+      
       return {
         'day': DateFormat.E().format(weekDay)[0],
         'value': totalSum};
+    });
+  }
+
+  double get _weekTotalValue {
+    return groupedTransactions.fold(0.0, (sum, tr) {
+      return sum + (tr['value'] as double);
     });
   }
 
@@ -40,9 +44,13 @@ class Chart extends StatelessWidget {
       elevation: 6,
       margin: EdgeInsets.all(20),
       child: Row(
-        children: [
-
-        ],
+        children: groupedTransactions.map((tr) {
+          return ChartBar(
+            label: tr['day'] as String,
+            value: tr['value'] as double,
+            percentage: (tr['value'] as double) / _weekTotalValue,
+          );
+        }).toList(),
       ),
     );
   }
