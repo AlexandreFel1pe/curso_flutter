@@ -50,6 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _transactions.add(newTransaction);
     });
+
+    Navigator.of(context).pop();
   }
 
   void _removeTransaction(Transaction transaction) {
