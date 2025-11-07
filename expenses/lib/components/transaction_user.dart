@@ -70,12 +70,16 @@ class _TransactionUserState extends State<TransactionUser> {
     });
   }
 
+  void _removeTransaction(Transaction transaction) {
+    _transactions.remove(transaction);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         TransactionForm(onSubmit: _addTransaction),
-        TransactionList(transactions: _transactions),
+        TransactionList(transactions: _transactions, removeTransaction: _removeTransaction),
       ],
     );
   }

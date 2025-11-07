@@ -3,19 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
-  const TransactionList({required this.transactions , super.key});
+  const TransactionList({required this.transactions, required this.removeTransaction , super.key});
 
   final List<Transaction> transactions;
+  final void Function(Transaction) removeTransaction;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            ...transactions.reversed.map((tr) {
-              return Card(
+      child: ListView(
+        children: [
+          ...transactions.reversed.map((tr) {
+            return Card(
+              child: Dismissible(
+                key: Key(tr.id),
                 child: Row(
                   children: [
                     Container(
@@ -60,10 +62,11 @@ class TransactionList extends StatelessWidget {
                     ),
                   ],
                 ),
-              );
-            }),
-          ],
-        ),
+                onDismissed: (value) => removeTransaction(tr),
+              ),
+            );
+          }),
+        ],
       ),
     );
   }
