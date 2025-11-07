@@ -53,9 +53,11 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.of(context).pop();
   }
 
-  void _removeTransaction(Transaction transaction) {
+  void _removeTransaction(String id) {
     setState(() {
-      _transactions.remove(transaction);
+      _transactions.removeWhere((tr) {
+        return tr.id == id;
+      });
     });
   }
   
