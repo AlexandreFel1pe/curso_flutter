@@ -15,7 +15,7 @@ class ExpensesApp extends StatelessWidget {
       home: MyHomePage(),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.green),
+          seedColor: Colors.deepPurpleAccent),
           fontFamily: 'Quicksand',
       ),
     );
@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
       value: 11.30,
       date: DateTime.now(),
     ),
-  ].reversed.toList();
+  ];
 
   List<Transaction> get _recentTransactions {
     return _transactions.where((tr) {
@@ -122,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SingleChildScrollView(
         child: Center(
-          child: SizedBox(
+          child: Container(
             width: max(0, 500),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,

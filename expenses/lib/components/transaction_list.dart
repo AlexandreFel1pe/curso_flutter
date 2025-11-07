@@ -35,7 +35,7 @@ class TransactionList extends StatelessWidget {
       ) : ListView.builder(
         itemCount: transactions.length,
         itemBuilder: (ctx, index ) {
-          final tr = transactions[index];
+          final tr = transactions.reversed.toList()[index];
           return Dismissible(
             key: Key(tr.id),
             child: Card(
