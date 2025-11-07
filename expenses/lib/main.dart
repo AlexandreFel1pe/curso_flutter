@@ -72,43 +72,45 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
-            child: IconButton(
-              icon: Icon(Icons.add),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+              child: IconButton(
+                icon: Icon(Icons.add),
+                color: Colors.white,
+                onPressed: () => _openTransactionFormModal(context)),
+            ),
+          ],
+          title: Text(
+            'Despesas Pessoais',
+            style: TextStyle(
               color: Colors.white,
-              onPressed: () => _openTransactionFormModal(context)),
+            ),
           ),
-        ],
-        title: Text(
-          'Despesas Pessoais',
-          style: TextStyle(
-            color: Colors.white,
-          ),
+          backgroundColor: Theme.of(context).primaryColor,
         ),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Container(
-            width: max(0, 500),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Chart(recentTransaction: _recentTransactions),
-                TransactionList(transactions: _transactions, removeTransaction: _removeTransaction),
-              ],
+        body: SingleChildScrollView(
+          child: Center(
+            child: Container(
+              width: max(0, 500),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Chart(recentTransaction: _recentTransactions),
+                  TransactionList(transactions: _transactions, removeTransaction: _removeTransaction),
+                ],
+              ),
             ),
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () => _openTransactionFormModal(context)),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _openTransactionFormModal(context)),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
