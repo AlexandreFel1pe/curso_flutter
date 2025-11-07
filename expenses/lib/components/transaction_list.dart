@@ -63,6 +63,10 @@ class TransactionList extends StatelessWidget {
                 subtitle: Text(
                   DateFormat('d MMM y').format(tr.date),
                 ),
+                trailing: IconButton(
+                  onPressed: () => removeTransaction(tr),
+                  icon: Icon(Icons.delete_outline)),
+                  iconColor: Colors.pinkAccent,
               ),
             ),
             onDismissed: (value) => removeTransaction(tr),
