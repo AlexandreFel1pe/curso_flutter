@@ -1,5 +1,7 @@
 import 'dart:math';
-import 'package:expenses/components/transaction_user.dart';
+import 'package:expenses/components/transaction_form.dart';
+import 'package:expenses/components/transaction_list.dart';
+import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 main() => runApp(ExpensesApp());
 
@@ -8,12 +10,60 @@ class ExpensesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MyHomePage());
+    return MaterialApp(
+      home: MyHomePage()
+    );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  MyHomePage({super.key});
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final _transactions = [
+    Transaction(
+      id: 't1',
+      title: 'Novo Tênis de Corrida',
+      value: 310.76,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Conta de Luz',
+      value: 211.3,
+      date: DateTime.now(),
+    ),
+  ];
+
+  void _addTransaction(String title, double value) {
+    final newTransaction = Transaction(
+      id: Random().nextDouble().toString(),
+      title: title,
+      value: value,
+      date: DateTime.now(),
+    );
+
+    setState(() {
+      _transactions.add(newTransaction);
+    });
+  }
+
+  void _removeTransaction(Transaction transaction) {
+    _transactions.remove(transaction);
+  }
+  
+  _openTransactionFormModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context, 
+      builder: (ctx) {
+        return TransactionForm(onSubmit: _addTransaction);
+      }
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +75,7 @@ class MyHomePage extends StatelessWidget {
             child: IconButton(
               icon: Icon(Icons.add),
               color: Colors.white,
-              onPressed: () {}),
+              onPressed: () => _openTransactionFormModal(context)),
           ),
         ],
         title: Text(
@@ -53,7 +103,7 @@ class MyHomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                TransactionUser(),
+                TransactionList(transactions: _transactions, removeTransaction: _removeTransaction),
               ],
             ),
           ),
@@ -61,7 +111,7 @@ class MyHomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {}),
+        onPressed: () => _openTransactionFormModal(context)),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
