@@ -29,8 +29,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _transactions = [
-    Transaction(
+  final List<Transaction> _transactions = [
+    /*Transaction(
       id: 't1',
       title: 'Novo Tênis de Corrida',
       value: 310.76,
@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
       title: 'Conta de Luz',
       value: 211.3,
       date: DateTime.now(),
-    ),
+    ),*/
   ];
 
   void _addTransaction(String title, double value) {
@@ -60,7 +60,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _removeTransaction(Transaction transaction) {
-    _transactions.remove(transaction);
+    setState(() {
+      _transactions.remove(transaction);
+    });
   }
   
   _openTransactionFormModal(BuildContext context) {
