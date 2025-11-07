@@ -12,10 +12,11 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      child: ListView(
-        children: [
-          ...transactions.reversed.map((tr) {
-            return Card(
+      child: ListView.builder(
+        itemCount: transactions.length,
+        itemBuilder: (ctx, index ) {
+          final tr = transactions[index];
+          return Card(
               child: Dismissible(
                 key: Key(tr.id),
                 child: Row(
@@ -65,8 +66,7 @@ class TransactionList extends StatelessWidget {
                 onDismissed: (value) => removeTransaction(tr),
               ),
             );
-          }),
-        ],
+        }
       ),
     );
   }
