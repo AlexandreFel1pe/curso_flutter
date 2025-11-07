@@ -19,6 +19,15 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+            child: IconButton(
+              icon: Icon(Icons.add),
+              color: Colors.white,
+              onPressed: () {}),
+          ),
+        ],
         title: Text(
           'Despesas Pessoais',
           style: TextStyle(
@@ -50,6 +59,10 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {}),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
