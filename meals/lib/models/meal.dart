@@ -49,9 +49,7 @@ class Meal {
         return 'Normal';
       case Complexity.Difficult:
         return 'Dificil';
-      default:
-        return 'Desconhecida';
-    }
+      }
   }
 
   String get costText {
@@ -62,8 +60,6 @@ class Meal {
         return 'Justo';
       case Cost.Expensive:
         return 'Caro';
-      default:
-        return 'Desconhecida';
-    }
+      }
   }
 }
