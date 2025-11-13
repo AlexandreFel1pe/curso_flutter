@@ -21,6 +21,6 @@ class ProductGrid extends StatelessWidget {
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),
-        );
+    );
   }
 }
