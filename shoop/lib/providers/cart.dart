@@ -4,12 +4,14 @@ import 'package:shop/providers/product.dart';
 
 class CartItem {
   final String id;
+  final String productId;
   final String title;
   final int quantity;
   final double price;
 
   CartItem({
     required this.id,
+    required this.productId,
     required this.title,
     required this.quantity,
     required this.price,
@@ -42,6 +44,7 @@ class Cart with ChangeNotifier {
       _items.update(produc.id, (existingItem) {
         return CartItem(
           id: existingItem.id, 
+          productId: produc.id,
           title: existingItem.title, 
           quantity: existingItem.quantity + 1, 
           price: existingItem.price
@@ -52,6 +55,7 @@ class Cart with ChangeNotifier {
         produc.id,
         () => CartItem(
           id: Random().nextBool().toString(), 
+          productId: produc.id,
           title: produc.title, 
           quantity: 1, 
           price: produc.price
@@ -59,6 +63,12 @@ class Cart with ChangeNotifier {
       );
     }
 
+    notifyListeners();
+  }
+
+  void removeItem(String productId) {
+    _items.remove(productId);
+    
     notifyListeners();
   }
 }
