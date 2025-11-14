@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 import 'package:shop/providers/product.dart';
 
@@ -18,10 +17,14 @@ class CartItem {
 }
 
 class Cart with ChangeNotifier {
-  late Map<String, CartItem> _items;
+  Map<String, CartItem> _items = {};
 
   Map<String, CartItem> get item {
     return {..._items};
+  }
+
+  int get itemCount {
+    return _items.length;
   }
 
   void addItem(Product produc) {
