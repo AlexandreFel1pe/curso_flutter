@@ -43,6 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
     Transaction(id: '19', title: 'Bermuda', value: 67, date: DateTime.now()),
   ];
 
+  bool _showChart = false;
+
   List<Transaction> get _recentTransactions {
     return _transactions.where((tr) {
       return tr.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
@@ -115,11 +117,26 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Container(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Exibir Gráfico'),
+                      Switch(
+                        value: _showChart,
+                        onChanged: (value) {
+                          print(value);
+                          setState(() {
+                            _showChart = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  if (_showChart) Container(
                     height: availableHeight * 0.3,
                     child: Chart(recentTransaction: _recentTransactions),
                   ),
-                  Container(
+                  if (!_showChart) Container(
                     height: availableHeight * 0.7,
                     child: TransactionList(transactions: _transactions, removeTransaction: _removeTransaction),
                   ),
