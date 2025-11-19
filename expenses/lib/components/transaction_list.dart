@@ -10,9 +10,8 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 430,
-      child: transactions.isEmpty ? Column(
+    return transactions.isEmpty 
+      ? Column(
         children: [
           SizedBox(
             height: 20,
@@ -32,7 +31,8 @@ class TransactionList extends StatelessWidget {
             ),
           ),
         ],
-      ) : ListView.builder(
+      )
+      : ListView.builder(
         itemCount: transactions.length,
         itemBuilder: (ctx, index ) {
           final tr = transactions.reversed.toList()[index];
@@ -72,7 +72,6 @@ class TransactionList extends StatelessWidget {
             onDismissed: (value) => removeTransaction(tr.id),
           );
         }
-      ),
-    );
+      );
   }
 }

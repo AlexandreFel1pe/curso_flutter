@@ -30,7 +30,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _transactions = [];
+  final List<Transaction> _transactions = [
+    Transaction(id: '1', title: 'Capa', value: 100, date: DateTime.now()),
+    Transaction(id: '2', title: 'Calça', value: 200, date: DateTime.now()),
+    Transaction(id: '3', title: 'Capacete', value: 500, date: DateTime.now()),
+    Transaction(id: '4', title: 'Blusa', value: 50, date: DateTime.now()),
+    Transaction(id: '5', title: 'Boné', value: 25, date: DateTime.now()),
+    Transaction(id: '6', title: 'Chapeu', value: 80, date: DateTime.now()),
+    Transaction(id: '7', title: 'Chinelo', value: 15, date: DateTime.now()),
+    Transaction(id: '8', title: 'Sandalia', value: 140, date: DateTime.now()),
+    Transaction(id: '9', title: 'Sapato', value: 360, date: DateTime.now()),
+    Transaction(id: '19', title: 'Bermuda', value: 67, date: DateTime.now()),
+  ];
 
   List<Transaction> get _recentTransactions {
     return _transactions.where((tr) {
@@ -72,26 +83,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      actions: [
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+          child: IconButton(
+            icon: Icon(Icons.add),
+            color: Colors.white,
+            onPressed: () => _openTransactionFormModal(context)),
+        ),
+      ],
+      title: Text(
+        'Despesas Pessoais',
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+      backgroundColor: Theme.of(context).primaryColor,
+    );
+
+    final availableHeight = MediaQuery.of(context).size.height
+      - appBar.preferredSize.height - MediaQuery.of(context).padding.vertical;
+
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          actions: [
-            Container(
-              margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
-              child: IconButton(
-                icon: Icon(Icons.add),
-                color: Colors.white,
-                onPressed: () => _openTransactionFormModal(context)),
-            ),
-          ],
-          title: Text(
-            'Despesas Pessoais',
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-          backgroundColor: Theme.of(context).primaryColor,
-        ),
+        appBar: appBar,
         body: SingleChildScrollView(
           child: Center(
             child: Container(
@@ -99,8 +115,14 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Chart(recentTransaction: _recentTransactions),
-                  TransactionList(transactions: _transactions, removeTransaction: _removeTransaction),
+                  Container(
+                    height: availableHeight * 0.3,
+                    child: Chart(recentTransaction: _recentTransactions),
+                  ),
+                  Container(
+                    height: availableHeight * 0.7,
+                    child: TransactionList(transactions: _transactions, removeTransaction: _removeTransaction),
+                  ),
                 ],
               ),
             ),
